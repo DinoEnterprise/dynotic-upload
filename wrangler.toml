@@ -1,6 +1,5 @@
 name = "distribution-worker"
-main = "index.js"
-type = "javascript"
+main = "worker.js"
 compatibility_date = "2026-02-26"
 
 [[r2_buckets]]
