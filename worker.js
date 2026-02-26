@@ -14,20 +14,20 @@ export default {
     if (request.method === "POST") {
       try {
         const formData = await request.formData();
-        const file = formData.get("file"); // file input dari front-end
+        const file = formData.get("file"); // file dari front-end
         if (!file) throw new Error("No file uploaded");
 
         // Tentukan folder berdasarkan tipe file
-        const type = file.type.startsWith("image/") ? "covers/" : "audio/";
-        const fileName = `${type}${Date.now()}-${file.name}`;
+        const folder = file.type.startsWith("image/") ? "covers/" : "audio/";
+        const fileName = `${folder}${Date.now()}-${file.name}`;
 
         // Upload ke R2
-        await env.dynotic-storage.put(fileName, file.stream(), {
+        await env.dynotic_storage.put(fileName, file.stream(), {
           httpMetadata: { contentType: file.type }
         });
 
-        // Generate URL
-        const fileURL = `https://${env.5b66e179d873e88287a27ac22ab66678}.r2.cloudflarestorage.com/${fileName}`;
+        // URL file
+        const fileURL = `https://${env.ACCOUNT_ID}.r2.cloudflarestorage.com/${fileName}`;
 
         return new Response(JSON.stringify({ success: true, url: fileURL }), {
           headers: { "Content-Type": "application/json", ...corsHeaders }
