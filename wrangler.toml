@@ -1,0 +1,8 @@
+name = "distribution-worker"
+main = "index.js"
+type = "javascript"
+compatibility_date = "2026-02-26"
+
+[[r2_buckets]]
+binding = "dynotic-storage"
+bucket_name = "dynotic-storage"
