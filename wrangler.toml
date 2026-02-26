@@ -1,7 +1,7 @@
-name = "dynotic-worker"
+name = "dynotic-upload"
 main = "worker.js"
 compatibility_date = "2026-02-26"
 
 [[r2_buckets]]
-binding = "dynotic-storage"
+binding = "dynoticStorage"   
 bucket_name = "dynotic-storage"
