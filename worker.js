@@ -21,13 +21,13 @@ export default {
         const type = file.type.startsWith("image/") ? "covers/" : "audio/";
         const fileName = `${type}${Date.now()}-${file.name}`;
 
-        // Upload ke R2
-        await env.dynoticStorage.put(fileName, file.stream(), {
+        // Upload ke R2 pakai binding dynoticStore
+        await env.dynoticStore.put(fileName, file.stream(), {
           httpMetadata: { contentType: file.type }
         });
 
-        // Generate URL publik
-        const fileURL = `https://${env.dynoticStorage.bucketName}.r2.cloudflarestorage.com/${fileName}`;
+        // URL publik dari bucket asli
+        const fileURL = `https://dynotic-store.r2.cloudflarestorage.com/${fileName}`;
 
         return new Response(JSON.stringify({ success: true, url: fileURL }), {
           headers: { "Content-Type": "application/json", ...corsHeaders }
