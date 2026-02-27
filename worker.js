@@ -27,8 +27,8 @@ export default {
         });
 
         // URL publik (gunakan R2 bucket public URL)
-        const fileURL = `https://${env["dynotic-storage"].bucketName}.r2.cloudflarestorage.com/${fileName}`;
-
+        const fileURL = `https://dynotic-storage.r2.cloudflarestorage.com/${fileName}`;
+        
         return new Response(
           JSON.stringify({ success: true, url: fileURL }),
           { headers: { "Content-Type": "application/json", ...corsHeaders } }
