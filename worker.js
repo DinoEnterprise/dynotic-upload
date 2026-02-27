@@ -3,7 +3,7 @@ export default {
     const corsHeaders = {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type"
+      "Access-Control-Allow-Headers": "Content-Type",
     };
 
     // Preflight CORS
@@ -14,30 +14,31 @@ export default {
     if (request.method === "POST") {
       try {
         const formData = await request.formData();
-        const file = formData.get("file"); // ambil file dari form
+        const file = formData.get("file");
         if (!file) throw new Error("No file uploaded");
 
         // Tentukan folder berdasarkan tipe file
         const type = file.type.startsWith("image/") ? "covers/" : "audio/";
         const fileName = `${type}${Date.now()}-${file.name}`;
 
-        // Upload ke R2 pakai binding dynoticStore
-        await env.dynoticStore.put(fileName, file.stream(), {
-          httpMetadata: { contentType: file.type }
+        // Upload ke R2
+        await env["dynotic-storage"].put(fileName, file.stream(), {
+          httpMetadata: { contentType: file.type },
         });
 
-        // URL publik dari bucket asli
-        const fileURL = `https://dynotic-store.r2.cloudflarestorage.com/${fileName}`;
+        // URL publik (gunakan R2 bucket public URL)
+        const fileURL = `https://${env["dynotic-storage"].bucketName}.r2.cloudflarestorage.com/${fileName}`;
 
-        return new Response(JSON.stringify({ success: true, url: fileURL }), {
-          headers: { "Content-Type": "application/json", ...corsHeaders }
-        });
+        return new Response(
+          JSON.stringify({ success: true, url: fileURL }),
+          { headers: { "Content-Type": "application/json", ...corsHeaders } }
+        );
 
       } catch (err) {
-        return new Response(JSON.stringify({ success: false, error: err.message }), {
-          status: 500,
-          headers: { "Content-Type": "application/json", ...corsHeaders }
-        });
+        return new Response(
+          JSON.stringify({ success: false, error: err.message }),
+          { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        );
       }
     }
 
