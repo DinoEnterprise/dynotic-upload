@@ -2,7 +2,7 @@ name = "dynotic-uploader"
 type = "javascript"
 
 # Akun Cloudflare
-account_id = "YOUR_ACCOUNT_ID" # ganti dengan account ID-mu
+account_id = "e385cd0f482f6239a6d4f2182db0aff875412" # ganti dengan account ID-mu
 workers_dev = true
 route = "" # kosong dulu kalo mau pakai workers.dev subdomain
 compatibility_date = "2026-02-27"
