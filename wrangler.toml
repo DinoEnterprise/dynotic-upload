@@ -6,6 +6,7 @@ account_id = "e385cd0f482f6239a6d4f2182db0aff875412" # ganti dengan account ID-m
 workers_dev = true
 route = "" # kosong dulu kalo mau pakai workers.dev subdomain
 compatibility_date = "2026-02-27"
+main = "worker.js"
 
 # R2 binding
 [[r2_buckets]]
