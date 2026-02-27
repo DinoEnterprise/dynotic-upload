@@ -1,15 +1,13 @@
 name = "dynotic-uploader"
 type = "javascript"
 
-# Akun Cloudflare
-account_id = "e385cd0f482f6239a6d4f2182db0aff875412" # ganti dengan account ID-mu
+account_id = "e385cd0f482f6239a6d4f2182db0aff875412" 
 workers_dev = true
-route = "" # kosong dulu kalo mau pakai workers.dev subdomain
+route = "" 
 compatibility_date = "2026-02-27"
 main = "worker.js"
 
-# R2 binding
 [[r2_buckets]]
-binding = "dynotic-storage"  # nama binding di Worker
-bucket_name = "dynotic-storage" # nama bucket R2-mu
+binding = "dynotic-storage"  
+bucket_name = "dynotic-storage"
 preview_bucket_name = "dynotic-storage"
